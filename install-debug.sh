@@ -5,7 +5,7 @@
 # Web: https://www.xavatar.com    
 #
 # Program:
-#   Install yiimp on Ubuntu 16.04/18.04 running Nginx, MariaDB, and php7.3
+#   Install yiimp on Ubuntu 16.04/18.04 running Nginx, MariaDB, and php7.2
 #   v0.2 (update Avril, 2020)
 # 
 ################################################################################
@@ -46,7 +46,7 @@
     echo
     echo -e "$GREEN************************************************************************$COL_RESET"
     echo -e "$GREEN Yiimp Install Script v0.2 $COL_RESET"
-    echo -e "$GREEN Install yiimp on Ubuntu 16.04/18.04 running Nginx, MariaDB, and php7.3 $COL_RESET"
+    echo -e "$GREEN Install yiimp on Ubuntu 16.04/18.04 running Nginx, MariaDB, and php7.2 $COL_RESET"
     echo -e "$GREEN************************************************************************$COL_RESET"
     echo
     sleep 3
@@ -159,10 +159,10 @@
     echo -e "$GREEN Done...$COL_RESET"
 
     
-    # Installing Installing php7.3
+    # Installing Installing php7.2
     echo
     echo
-    echo -e "$CYAN => Installing php7.3 : $COL_RESET"
+    echo -e "$CYAN => Installing php7.2 : $COL_RESET"
     echo
     sleep 3
     
@@ -172,21 +172,21 @@
     fi
     sudo apt -y update
 
-    if [[ ("$DISTRO" == "16") ]]; then
-    sudo apt -y install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
-    php7.3-cgi php-pear php-auth imagemagick libruby php7.3-curl php7.3-intl php7.3-pspell mcrypt\
-    php7.3-recode php7.3-sqlite3 php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php-memcache php-imagick php-gettext php7.3-zip php7.3-mbstring
-    #sudo phpenmod mcrypt
-    #sudo phpenmod mbstring
+    if [[ ("$DISTRO" == "22") ]]; then
+	apt_install php7.2-fpm php7.2-opcache php7.2 php7.2-common php7.2-gd php7.2-mysql php7.2-imap php7.2-cli
+	apt_install php7.2-cgi php7.2-curl php7.2-intl php7.2-pspell
+	apt_install php7.2-sqlite3 php7.2-tidy php7.2-xmlrpc php7.2-xsl php7.2-zip
+	apt_install php7.2-mbstring php7.2-memcache php7.2-memcached certbot
+	apt_install libssh-dev libbrotli-dev
     else
-    sudo apt -y install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
-    php7.3-cgi php-pear imagemagick libruby php7.3-curl php7.3-intl php7.3-pspell mcrypt\
-    php7.3-recode php7.3-sqlite3 php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php-memcache php-imagick php-gettext php7.3-zip php7.3-mbstring \
+    sudo apt -y install php7.2-fpm php7.2-opcache php7.2 php7.2-common php7.2-gd php7.2-mysql php7.2-imap php7.2-cli \
+    php7.2-cgi php-pear imagemagick libruby php7.2-curl php7.2-intl php7.2-pspell mcrypt\
+    php7.2-recode php7.2-sqlite3 php7.2-tidy php7.2-xmlrpc php7.2-xsl memcached php-memcache php-imagick php-gettext php7.2-zip php7.2-mbstring \
     libpsl-dev libnghttp2-dev
     fi
     sleep 5
-    sudo systemctl start php7.3-fpm
-    sudo systemctl status php7.3-fpm | sed -n "1,3p"
+    sudo systemctl start php7.2-fpm
+    sudo systemctl status php7.2-fpm | sed -n "1,3p"
     sleep 15
     echo
     echo -e "$GREEN Done...$COL_RESET"
@@ -218,7 +218,7 @@
     sudo apt -y install libminiupnpc10 libzmq5
     sudo apt -y install libcanberra-gtk-module libqrencode-dev libzmq3-dev
     sudo apt -y install libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
-    sudo add-apt-repository -y ppa:bitcoin/bitcoin
+    sudo add-apt-repository -y  ppa:luke-jr/bitcoincore
     sudo apt -y update
     sudo apt -y install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
     echo -e "$GREEN Done...$COL_RESET"
@@ -487,7 +487,7 @@
     
         location ~ ^/index\.php$ {
             fastcgi_split_path_info ^(.+\.php)(/.+)$;
-            fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+            fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
             fastcgi_index index.php;
             include fastcgi_params;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -519,7 +519,7 @@
             deny all;
       }
         location ~ /phpmyadmin/(.+\.php)$ {
-            fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+            fastcgi_pass unix:/run/php/php7.2-fpm.sock;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
             include fastcgi_params;
             include snippets/fastcgi-php.conf;
@@ -530,7 +530,7 @@
 
     sudo ln -s /etc/nginx/sites-available/$server_name.conf /etc/nginx/sites-enabled/$server_name.conf
     sudo ln -s /var/web /var/www/$server_name/html
-    sudo systemctl reload php7.3-fpm.service
+    sudo systemctl reload php7.2-fpm.service
     sudo systemctl restart nginx.service
     echo -e "$GREEN Done...$COL_RESET"
         
@@ -612,7 +612,7 @@
         
             location ~ ^/index\.php$ {
                 fastcgi_split_path_info ^(.+\.php)(/.+)$;
-                fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+                fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
                 fastcgi_index index.php;
                 include fastcgi_params;
                 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -643,7 +643,7 @@
             deny all;
     }
         location ~ /phpmyadmin/(.+\.php)$ {
-            fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+            fastcgi_pass unix:/run/php/php7.2-fpm.sock;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
             include fastcgi_params;
             include snippets/fastcgi-php.conf;
@@ -654,7 +654,7 @@
     ' | sudo -E tee /etc/nginx/sites-available/$server_name.conf >/dev/null 2>&1
     fi
     
-    sudo systemctl reload php7.3-fpm.service
+    sudo systemctl reload php7.2-fpm.service
     sudo systemctl restart nginx.service
     echo -e "$GREEN Done...$COL_RESET"
     
@@ -697,7 +697,7 @@
     
         location ~ ^/index\.php$ {
             fastcgi_split_path_info ^(.+\.php)(/.+)$;
-            fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+            fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
             fastcgi_index index.php;
             include fastcgi_params;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -729,7 +729,7 @@
             deny all;
     }
         location ~ /phpmyadmin/(.+\.php)$ {
-            fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+            fastcgi_pass unix:/run/php/php7.2-fpm.sock;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
             include fastcgi_params;
             include snippets/fastcgi-php.conf;
@@ -740,7 +740,7 @@
 
     sudo ln -s /etc/nginx/sites-available/$server_name.conf /etc/nginx/sites-enabled/$server_name.conf
     sudo ln -s /var/web /var/www/$server_name/html
-    sudo systemctl reload php7.3-fpm.service
+    sudo systemctl reload php7.2-fpm.service
     sudo systemctl restart nginx.service
     echo -e "$GREEN Done...$COL_RESET"
    
@@ -823,7 +823,7 @@
         
             location ~ ^/index\.php$ {
                 fastcgi_split_path_info ^(.+\.php)(/.+)$;
-                fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+                fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
                 fastcgi_index index.php;
                 include fastcgi_params;
                 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -854,7 +854,7 @@
             deny all;
     }
         location ~ /phpmyadmin/(.+\.php)$ {
-            fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+            fastcgi_pass unix:/run/php/php7.2-fpm.sock;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
             include fastcgi_params;
             include snippets/fastcgi-php.conf;
@@ -867,7 +867,7 @@
     echo -e "$GREEN Done...$COL_RESET"
 
     fi
-    sudo systemctl reload php7.3-fpm.service
+    sudo systemctl reload php7.2-fpm.service
     sudo systemctl restart nginx.service
     fi
     
@@ -1021,7 +1021,7 @@
     define('"'"'YIIMP_FIAT_ALTERNATIVE'"'"', '"'"'USD'"'"'); // USD is main
     define('"'"'YAAMP_USE_NICEHASH_API'"'"', false);
     
-    define('"'"'YAAMP_BTCADDRESS'"'"', '"'"'1C1hnjk3WhuAvUN6Ny6LTxPD3rwSZwapW7'"'"');
+    define('"'"'YAAMP_BTCADDRESS'"'"', '"'"'3FrWuT56pXt9gf6fMSmzFfLSAW4SRo1hR7'"'"');
     
     define('"'"'YAAMP_SITE_URL'"'"', '"'"''"${server_name}"''"'"');
     define('"'"'YAAMP_STRATUM_URL'"'"', YAAMP_SITE_URL); // change if your stratum server is on a different host
@@ -1057,14 +1057,14 @@
     // Automatic withdraw to Yaamp btc wallet if btc balance > 0.3
     define('"'"'EXCH_AUTO_WITHDRAW'"'"', 0.3);
     
-    // nicehash keys deposit account & amount to deposit at a time
-    define('"'"'NICEHASH_API_KEY'"'"','"'"'f96c65a7-3d2f-4f3a-815c-cacf00674396'"'"');
-    define('"'"'NICEHASH_API_ID'"'"','"'"'825979'"'"');
-    define('"'"'NICEHASH_DEPOSIT'"'"','"'"'3ABoqBjeorjzbyHmGMppM62YLssUgJhtuf'"'"');
+     // nicehash keys deposit account & amount to deposit at a time
+    define('"'"'NICEHASH_API_KEY'"'"','"'"'6b950c15-b6a9-4f74-a7ec-1c2496bc8e8e'"'"');
+    define('"'"'NICEHASH_API_ID'"'"','"'"'692bad3e-e86d-400a-99c2-e67772feff55'"'"');
+    define('"'"'NICEHASH_DEPOSIT'"'"','"'"'bc1q705e4qyyn9fmghud00vvp3e7cqscmjqcqs2e2t'"'"');
     define('"'"'NICEHASH_DEPOSIT_AMOUNT'"'"','"'"'0.01'"'"');
     
     $cold_wallet_table = array(
-    '"'"'1PqjApUdjwU9k4v1RDWf6XveARyEXaiGUz'"'"' => 0.10,
+	'"'"'bc1q705e4qyyn9fmghud00vvp3e7cqscmjqcqs2e2t'"'"' => 0.10,
     );
     
     // Sample fixed pool fees
@@ -1160,8 +1160,8 @@
     sudo systemctl status mysql | sed -n "1,3p"
     sudo systemctl restart nginx.service
     sudo systemctl status nginx | sed -n "1,3p"
-    sudo systemctl restart php7.3-fpm.service
-    sudo systemctl status php7.3-fpm | sed -n "1,3p"
+    sudo systemctl restart php7.2-fpm.service
+    sudo systemctl status php7.2-fpm | sed -n "1,3p"
 
 
     echo
