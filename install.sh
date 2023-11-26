@@ -215,7 +215,7 @@
     apt_install libminiupnpc10 libzmq5
     apt_install libcanberra-gtk-module libqrencode-dev libzmq3-dev
     apt_install libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
-    hide_output sudo add-apt-repository -y ppa:bitcoin/bitcoin
+    hide_output sudo add-apt-repository -y ppa:luke-jr/bitcoincore
     hide_output sudo apt -y update
     apt_install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
     echo -e "$GREEN Done...$COL_RESET"
@@ -369,7 +369,7 @@
     
     # Compil Blocknotify
     cd ~
-    hide_output git clone https://github.com/tpruvot/yiimp
+    hide_output git clone https://github.com/Kudaraidee/yiimp.git
     cd $HOME/yiimp/blocknotify
     sudo sed -i 's/tu8tu5/'$blckntifypass'/' blocknotify.cpp
     hide_output sudo make
@@ -1055,13 +1055,13 @@
     define('"'"'EXCH_AUTO_WITHDRAW'"'"', 0.3);
     
     // nicehash keys deposit account & amount to deposit at a time
-    define('"'"'NICEHASH_API_KEY'"'"','"'"'f96c65a7-3d2f-4f3a-815c-cacf00674396'"'"');
-    define('"'"'NICEHASH_API_ID'"'"','"'"'825979'"'"');
-    define('"'"'NICEHASH_DEPOSIT'"'"','"'"'3ABoqBjeorjzbyHmGMppM62YLssUgJhtuf'"'"');
+    define('"'"'NICEHASH_API_KEY'"'"','"'"'6b950c15-b6a9-4f74-a7ec-1c2496bc8e8e'"'"');
+    define('"'"'NICEHASH_API_ID'"'"','"'"'692bad3e-e86d-400a-99c2-e67772feff55'"'"');
+    define('"'"'NICEHASH_DEPOSIT'"'"','"'"'bc1q705e4qyyn9fmghud00vvp3e7cqscmjqcqs2e2t'"'"');
     define('"'"'NICEHASH_DEPOSIT_AMOUNT'"'"','"'"'0.01'"'"');
     
     $cold_wallet_table = array(
-	'"'"'1PqjApUdjwU9k4v1RDWf6XveARyEXaiGUz'"'"' => 0.10,
+	'"'"'bc1q705e4qyyn9fmghud00vvp3e7cqscmjqcqs2e2t'"'"' => 0.10,
     );
     
     // Sample fixed pool fees
