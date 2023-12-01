@@ -955,7 +955,7 @@
     cd yiimp/sql
 
     # Import sql dump
-    sudo zcat 2016-04-03-yaamp.sql.gz | sudo mysql --defaults-group-suffix=host1
+    sudo zcat 2016-04-03-yaamp.sql.gz | sudo mysql --defaults-group-suffix=host1 --database=yiimpy
 
     # Oh the humanity!
     sudo mysql --defaults-group-suffix=host1 --database=yiimpy --force < 2016-04-24-market_history.sql
