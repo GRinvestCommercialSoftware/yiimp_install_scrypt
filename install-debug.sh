@@ -866,7 +866,6 @@
 
     echo -e "$GREEN Done...$COL_RESET"
 
-    fi
     sudo systemctl reload php7.3-fpm.service
     sudo systemctl restart nginx.service
     fi
