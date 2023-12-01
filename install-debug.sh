@@ -880,7 +880,7 @@
     sleep 3
     
     # Create database
-    Q1="CREATE DATABASE IF NOT EXISTS yiimpfrontend;"
+    Q1="CREATE DATABASE IF NOT EXISTS yiimpfrontend2;"
     Q2="GRANT ALL ON *.* TO 'panel'@'localhost' IDENTIFIED BY '$password';"
     Q3="FLUSH PRIVILEGES;"
     SQL="${Q1}${Q2}${Q3}"
@@ -898,12 +898,12 @@
     [clienthost1]
     user=panel
     password='"${password}"'
-    database=yiimpfrontend
+    database=yiimpfrontend2
     host=localhost
     [clienthost2]
     user=stratum
     password='"${password2}"'
-    database=yiimpfrontend
+    database=yiimpfrontend2
     host=localhost
     [myphpadmin]
     user=phpmyadmin
@@ -945,7 +945,7 @@
     # Peforming the SQL import
     echo
     echo
-    echo -e "$CYAN => Database 'yiimpfrontend' and users 'panel' and 'stratum' created with password $password and $password2, will be saved for you $COL_RESET"
+    echo -e "$CYAN => Database 'yiimpfrontend2' and users 'panel' and 'stratum' created with password $password and $password2, will be saved for you $COL_RESET"
     echo
     echo -e "Performing the SQL import"
     echo
@@ -997,7 +997,7 @@
     define('"'"'YAAMP_BIN'"'"', '"'"'/var/bin'"'"');
     
     define('"'"'YAAMP_DBHOST'"'"', '"'"'localhost'"'"');
-    define('"'"'YAAMP_DBNAME'"'"', '"'"'yiimpfrontend'"'"');
+    define('"'"'YAAMP_DBNAME'"'"', '"'"'yiimpfrontend2'"'"');
     define('"'"'YAAMP_DBUSER'"'"', '"'"'panel'"'"');
     define('"'"'YAAMP_DBPASSWORD'"'"', '"'"''"${password}"''"'"');
     
@@ -1099,7 +1099,7 @@
     sudo sed -i 's/password = tu8tu5/password = '$blckntifypass'/g' *.conf
     sudo sed -i 's/server = yaamp.com/server = '$server_name'/g' *.conf
     sudo sed -i 's/host = yaampdb/host = localhost/g' *.conf
-    sudo sed -i 's/database = yaamp/database = yiimpfrontend/g' *.conf
+    sudo sed -i 's/database = yaamp/database = yiimpfrontend2/g' *.conf
     sudo sed -i 's/username = root/username = stratum/g' *.conf
     sudo sed -i 's/password = patofpaq/password = '$password2'/g' *.conf
     cd ~
