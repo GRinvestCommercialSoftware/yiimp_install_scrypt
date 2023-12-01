@@ -172,12 +172,12 @@
     fi
     sudo apt -y update
 
-    if [[ ("$DISTRO" == "22") ]]; then
-	apt_install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli
-	apt_install php7.3-cgi php7.3-curl php7.3-intl php7.3-pspell
-	apt_install php7.3-sqlite3 php7.3-tidy php7.3-xmlrpc php7.3-xsl php7.3-zip
-	apt_install php7.3-mbstring php7.3-memcache php7.3-memcached certbot
-	apt_install libssh-dev libbrotli-dev
+    if [[ ("$DISTRO" == "16") ]]; then
+    sudo apt -y install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
+    php7.3-cgi php-pear php-auth imagemagick libruby php7.3-curl php7.3-intl php7.3-pspell mcrypt\
+    php7.3-recode php7.3-sqlite3 php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php-memcache php-imagick php-gettext php7.3-zip php7.3-mbstring
+    #sudo phpenmod mcrypt
+    #sudo phpenmod mbstring
     else
     sudo apt -y install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
     php7.3-cgi php-pear imagemagick libruby php7.3-curl php7.3-intl php7.3-pspell mcrypt\
@@ -218,7 +218,7 @@
     sudo apt -y install libminiupnpc10 libzmq5
     sudo apt -y install libcanberra-gtk-module libqrencode-dev libzmq3-dev
     sudo apt -y install libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
-    sudo add-apt-repository -y  ppa:luke-jr/bitcoincore
+    sudo add-apt-repository -y ppa:bitcoin/bitcoin
     sudo apt -y update
     sudo apt -y install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
     echo -e "$GREEN Done...$COL_RESET"
@@ -372,7 +372,7 @@
     
     # Compil Blocknotify
     cd ~
-    git clone https://github.com/Kudaraidee/yiimp.git
+    git clone https://github.com/tpruvot/yiimp
     cd $HOME/yiimp/blocknotify
     sudo sed -i 's/tu8tu5/'$blckntifypass'/' blocknotify.cpp
     sudo make
@@ -866,6 +866,7 @@
 
     echo -e "$GREEN Done...$COL_RESET"
 
+    fi
     sudo systemctl reload php7.3-fpm.service
     sudo systemctl restart nginx.service
     fi
@@ -957,24 +958,23 @@
     sudo zcat 2016-04-03-yaamp.sql.gz | sudo mysql --defaults-group-suffix=host1
     
     # Oh the humanity!
-
-    sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2016-04-24-market_history.sql
-    sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2016-04-27-settings.sql
-    sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2016-05-11-coins.sql
-    sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2016-05-15-benchmarks.sql
-    sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2016-05-23-bookmarks.sql
-    sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2016-06-01-notifications.sql
-    sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2016-06-04-bench_chips.sql
-    sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2016-11-23-coins.sql
-    sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2017-02-05-benchmarks.sql
-    sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2017-03-31-earnings_index.sql
-    sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2017-05-accounts_case_swaptime.sql
-    sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2017-06-payouts_coinid_memo.sql
-    sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2017-09-notifications.sql
-    sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2017-10-bookmarks.sql
-    sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2017-11-segwit.sql
-    sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2018-01-stratums_ports.sql
-    sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2018-02-coins_getinfo.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2016-04-24-market_history.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2016-04-27-settings.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2016-05-11-coins.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2016-05-15-benchmarks.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2016-05-23-bookmarks.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2016-06-01-notifications.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2016-06-04-bench_chips.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2016-11-23-coins.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2017-02-05-benchmarks.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2017-03-31-earnings_index.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2017-05-accounts_case_swaptime.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2017-06-payouts_coinid_memo.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2017-09-notifications.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2017-10-bookmarks.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2017-11-segwit.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2018-01-stratums_ports.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2018-02-coins_getinfo.sql
     echo -e "$GREEN Done...$COL_RESET"
         
     
@@ -1021,7 +1021,7 @@
     define('"'"'YIIMP_FIAT_ALTERNATIVE'"'"', '"'"'USD'"'"'); // USD is main
     define('"'"'YAAMP_USE_NICEHASH_API'"'"', false);
     
-    define('"'"'YAAMP_BTCADDRESS'"'"', '"'"'3FrWuT56pXt9gf6fMSmzFfLSAW4SRo1hR7'"'"');
+    define('"'"'YAAMP_BTCADDRESS'"'"', '"'"'1C1hnjk3WhuAvUN6Ny6LTxPD3rwSZwapW7'"'"');
     
     define('"'"'YAAMP_SITE_URL'"'"', '"'"''"${server_name}"''"'"');
     define('"'"'YAAMP_STRATUM_URL'"'"', YAAMP_SITE_URL); // change if your stratum server is on a different host
@@ -1057,14 +1057,14 @@
     // Automatic withdraw to Yaamp btc wallet if btc balance > 0.3
     define('"'"'EXCH_AUTO_WITHDRAW'"'"', 0.3);
     
-     // nicehash keys deposit account & amount to deposit at a time
-    define('"'"'NICEHASH_API_KEY'"'"','"'"'6b950c15-b6a9-4f74-a7ec-1c2496bc8e8e'"'"');
-    define('"'"'NICEHASH_API_ID'"'"','"'"'692bad3e-e86d-400a-99c2-e67772feff55'"'"');
-    define('"'"'NICEHASH_DEPOSIT'"'"','"'"'bc1q705e4qyyn9fmghud00vvp3e7cqscmjqcqs2e2t'"'"');
+    // nicehash keys deposit account & amount to deposit at a time
+    define('"'"'NICEHASH_API_KEY'"'"','"'"'f96c65a7-3d2f-4f3a-815c-cacf00674396'"'"');
+    define('"'"'NICEHASH_API_ID'"'"','"'"'825979'"'"');
+    define('"'"'NICEHASH_DEPOSIT'"'"','"'"'3ABoqBjeorjzbyHmGMppM62YLssUgJhtuf'"'"');
     define('"'"'NICEHASH_DEPOSIT_AMOUNT'"'"','"'"'0.01'"'"');
     
     $cold_wallet_table = array(
-	'"'"'bc1q705e4qyyn9fmghud00vvp3e7cqscmjqcqs2e2t'"'"' => 0.10,
+    '"'"'1PqjApUdjwU9k4v1RDWf6XveARyEXaiGUz'"'"' => 0.10,
     );
     
     // Sample fixed pool fees
