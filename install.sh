@@ -944,9 +944,10 @@
     cd yiimp/sql
     
     # Import sql dump
-    sudo zcat 2021-06-21-yaamp.sql.gz | sudo mysql --defaults-group-suffix=host1
+    apt_install unrar
+    sudo unrar x 2021-06-21-yaamp.sql.gz
+    sudo mysql --defaults-group-suffix=host1 < 2021-06-21-yaamp.sql
     
-    # Oh the humanity!
     sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2015-07-01-accounts_hostaddr.sql
 sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2015-07-15-coins_hasmasternodes.sql
 sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2015-09-20-blocks_worker.sql
@@ -978,6 +979,7 @@ sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2019
 sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2020-06-03-blocks.sql
 sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2022-10-14-shares_solo.sql
 sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2022-10-29-blocks_effort.sql
+
 
     echo -e "$GREEN Done...$COL_RESET"
         
