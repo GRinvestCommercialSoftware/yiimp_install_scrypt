@@ -165,20 +165,16 @@
     sleep 3
     
     source conf/pool.conf
+    apt_install software-properties-common build-essential
     hide_output sudo add-apt-repository -y ppa:ondrej/php
     hide_output sudo apt -y update
 
-    if [[ ("$DISTRO" == "22") ]]; then
-     apt_install php8.2-fpm php8.2-opcache php8.2 php8.2-common php8.2-gd php8.2-mysql php8.2-imap php8.2-cli \
-    php8.2-cgi php-pear imagemagick libruby php8.2-curl php8.2-intl php8.2-pspell mcrypt\
-    recode php8.2-sqlite3 php8.2-tidy php8.2-xmlrpc php8.2-xsl memcached php-memcache php-memcached php-imagick php-php-gettext php8.2-zip php8.2-mbstring \
-    libpsl-dev libnghttp2-dev
-    else
     apt_install php8.2-fpm php8.2-opcache php8.2 php8.2-common php8.2-gd php8.2-mysql php8.2-imap php8.2-cli \
     php8.2-cgi php-pear imagemagick libruby php8.2-curl php8.2-intl php8.2-pspell mcrypt\
-    php8.2-recode php8.2-sqlite3 php8.2-tidy php8.2-xmlrpc php8.2-xsl memcached php-memcache php-imagick php-gettext php8.2-zip php8.2-mbstring \
+    recode php8.2-sqlite3 php8.2-tidy php8.2-xmlrpc php8.2-xsl memcached php-memcache php-imagick php-php-gettext php8.2-zip php8.2-mbstring \
+    php8.2-memcache \
     libpsl-dev libnghttp2-dev
-    fi
+    
     sleep 5
     hide_output sudo systemctl start php8.2-fpm
     sudo systemctl status php8.2-fpm | sed -n "1,3p"
@@ -206,8 +202,7 @@
     echo -e "$CYAN => Installing Package to compile crypto currency $COL_RESET"
     echo
     sleep 3
-    
-    apt_install software-properties-common build-essential
+
     apt_install libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev libseccomp-dev libcap-dev libminiupnpc-dev gettext
     apt_install libminiupnpc10 libzmq5
     apt_install libcanberra-gtk-module libqrencode-dev libzmq3-dev
