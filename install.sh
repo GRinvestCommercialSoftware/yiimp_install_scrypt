@@ -951,11 +951,10 @@
     cd yiimp/sql
     
     # Import sql dump
-    sudo zcat 2016-04-03-yaamp.sql.gz | sudo mysql --defaults-group-suffix=host1
+    sudo zcat 2021-06-21-yaamp.sql.gz | sudo mysql --defaults-group-suffix=host1
     
     # Oh the humanity!
     sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2015-07-01-accounts_hostaddr.sql
-sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2015-07-12-yaamp.sql.gz
 sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2015-07-15-coins_hasmasternodes.sql
 sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2015-09-20-blocks_worker.sql
 sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2016-02-17-payouts_errmsg.sql
@@ -964,7 +963,6 @@ sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2016
 sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2016-03-26-markets.sql
 sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2016-03-30-coins.sql
 sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2016-04-03-accounts.sql
-sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2016-04-03-yaamp.sql.gz
 sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2016-04-24-market_history.sql
 sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2016-04-27-settings.sql
 sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2016-05-11-coins.sql
@@ -985,8 +983,6 @@ sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2018
 sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2018-09-22-workers.sql
 sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2019-03-coins_thepool_life.sql
 sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2020-06-03-blocks.sql
-sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2020-11-10-yaamp.sql.gz
-sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2021-06-21-yaamp.sql.gz
 sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2022-10-14-shares_solo.sql
 sudo mysql --defaults-group-suffix=host1 --database=yiimpfrontend --force < 2022-10-29-blocks_effort.sql
 
